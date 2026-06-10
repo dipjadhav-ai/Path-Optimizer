@@ -1,37 +1,40 @@
 #include "routeFinder.h"
 
-int main(){
+int main(int argc,char* argv[]){
+
+    if(argc!=3){
+        cout<<"Invalid Arguments";
+        return 1;
+    }
+
+    string source=argv[1];
+    string destination=argv[2];
 
     routeFinder rf;
 
-    string source;
-    string destination;
-
-    cin>>source>>destination;
-
     RouteResult result=
-        rf.getRoute(
-            source,
-            destination
-        );
+        rf.getRoute(source,destination);
 
     if(result.distance==INT_MAX){
 
-        cout<<"No route found\n";
-
+        cout<<"{\"error\":\"No Route Found\"}";
         return 0;
     }
 
-    cout<<"Distance : "
-        <<result.distance
-        <<"\n";
+    cout<<"{";
+    cout<<"\"distance\":"<<result.distance<<",";
 
-    for(auto city:result.path){
+    cout<<"\"path\":[";
 
-        cout<<city<<" -> ";
+    for(int i=0;i<result.path.size();i++){
+
+        cout<<"\""<<result.path[i]<<"\"";
+
+        if(i!=result.path.size()-1)
+            cout<<",";
     }
 
-    cout<<"\n";
+    cout<<"]}";
 
     return 0;
 }

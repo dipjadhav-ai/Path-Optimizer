@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path Optimizer</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🚗 Path Optimizer</h1>
+
+        <p class="info-text">
+            Select cities shown in the road network map below to find
+            the minimum travel cost and optimal route between them.
+        </p>
+
+        <div class="map-container">
+            <img src="map.png" alt="Road Network Map">
+        </div>
+
+        <div class="input-group">
+
+            <label>Source City</label>
+
+            <input
+                type="text"
+                id="source"
+                placeholder="Mumbai">
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Destination City</label>
+
+            <input
+                type="text"
+                id="destination"
+                placeholder="Kochi">
+
+        </div>
+
+        <button onclick="findRoute()">
+            Find Best Route
+        </button>
+
+        <div id="result"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
