@@ -1,15 +1,54 @@
+window.onload = async () => {
+
+    try{
+
+        const response =
+            await fetch("/cities");
+
+        const cities =
+            await response.json();
+
+        const source =
+            document.getElementById("source");
+
+        const destination =
+            document.getElementById("destination");
+
+        cities.forEach(city => {
+
+            source.innerHTML +=
+                `<option value="${city}">
+                    ${city}
+                </option>`;
+
+            destination.innerHTML +=
+                `<option value="${city}">
+                    ${city}
+                </option>`;
+        });
+    }
+
+    catch(error){
+
+        console.error(
+            "Unable to load cities",
+            error
+        );
+    }
+};
+
 async function findRoute(){
 
     const source =
-        document.getElementById("source").value.trim();
+        document.getElementById("source").value;
 
     const destination =
-        document.getElementById("destination").value.trim();
+        document.getElementById("destination").value;
 
     if(!source || !destination){
 
         alert(
-            "Please enter both cities."
+            "Please select both cities."
         );
 
         return;
@@ -41,8 +80,37 @@ async function findRoute(){
         }
 
         let html = `
+
             <div class="distance">
-                Total Travel Cost : ${data.distance}
+                Minimum Travel Cost : ${data.distance}
+            </div>
+
+            <div class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Cities Visited
+                    </div>
+
+                    <div class="stat-value">
+                        ${data.path.length}
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Stops
+                    </div>
+
+                    <div class="stat-value">
+                        ${data.path.length - 1}
+                    </div>
+
+                </div>
+
             </div>
 
             <div class="route">
@@ -56,7 +124,7 @@ async function findRoute(){
                 </div>
             `;
 
-            if(i !== data.path.length-1){
+            if(i !== data.path.length - 1){
 
                 html += `
                     <div class="arrow">
