@@ -1,10 +1,23 @@
 #include "routeFinder.h"
 
-routeFinder::routeFinder(){
-    distance=0;
-}
+RouteResult routeFinder::getRoute(
+    string source,
+    string destination
+){
 
-vector<int> routeFinder::finder(int node1,int node2){
+    RouteResult result;
+
+    result.distance=INT_MAX;
+
+    if(
+        maps.Ids.find(source)==maps.Ids.end() ||
+        maps.Ids.find(destination)==maps.Ids.end()
+    ){
+        return result;
+    }
+
+    int start=maps.Ids[source];
+    int end=maps.Ids[destination];
 
     priority_queue<
         pair<int,int>,
@@ -12,14 +25,19 @@ vector<int> routeFinder::finder(int node1,int node2){
         greater<pair<int,int>>
     > pq;
 
-    vector<int> mincost(maps.finalId,INT_MAX);
-    vector<int> parent(maps.finalId,-1);
+    vector<int> mincost(
+        maps.finalId,
+        INT_MAX
+    );
 
-    vector<int> ans;
+    vector<int> parent(
+        maps.finalId,
+        -1
+    );
 
-    mincost[node1]=0;
+    mincost[start]=0;
 
-    pq.push({0,node1});
+    pq.push({0,start});
 
     while(!pq.empty()){
 
@@ -34,51 +52,54 @@ vector<int> routeFinder::finder(int node1,int node2){
 
         for(auto nxt:maps.adj[node]){
 
-            int nextCost=nxt.first;
+            int edgeCost=nxt.first;
             int nextNode=nxt.second;
 
-            if(mincost[nextNode] > cost+nextCost){
+            if(
+                mincost[nextNode] >
+                cost+edgeCost
+            ){
 
-                mincost[nextNode]=cost+nextCost;
+                mincost[nextNode]=
+                    cost+edgeCost;
+
                 parent[nextNode]=node;
 
-                pq.push({cost+nextCost,nextNode});
+                pq.push({
+                    cost+edgeCost,
+                    nextNode
+                });
             }
         }
     }
 
-    distance=mincost[node2];
+    if(mincost[end]==INT_MAX)
+        return result;
 
-    if(distance==INT_MAX)
-        return {};
+    result.distance=mincost[end];
 
-    int node=node2;
+    vector<int> nodes;
+
+    int node=end;
 
     while(node!=-1){
 
-        ans.push_back(node);
+        nodes.push_back(node);
+
         node=parent[node];
     }
 
-    reverse(ans.begin(),ans.end());
+    reverse(
+        nodes.begin(),
+        nodes.end()
+    );
 
-    return ans;
-}
+    for(int city:nodes){
 
-void routeFinder::routeDisplay(vector<int> route,int roadcost){
-
-    if(roadcost==INT_MAX){
-
-        cout<<"No route exists\n";
-        return;
+        result.path.push_back(
+            maps.Cities[city]
+        );
     }
 
-    cout<<"\nShortest Route:\n";
-
-    for(int city:route){
-
-        cout<<maps.Cities[city]<<" -> ";
-    }
-
-    cout<<"\nDistance = "<<roadcost<<"\n";
+    return result;
 }

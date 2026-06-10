@@ -3,18 +3,23 @@
 
 #include "graph.h"
 
+struct RouteResult{
+
+    int distance;
+
+    vector<string> path;
+};
+
 class routeFinder{
 
 public:
 
     graph maps;
-    int distance;
 
-    routeFinder();
-
-    vector<int> finder(int start,int end);
-
-    void routeDisplay(vector<int> route,int roadcost);
+    RouteResult getRoute(
+        string source,
+        string destination
+    );
 };
 
 #endif

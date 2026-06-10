@@ -2,22 +2,36 @@
 
 int main(){
 
-    routeFinder route;
+    routeFinder rf;
 
-    string source,destination;
+    string source;
+    string destination;
 
-    cout<<"Enter source city : ";
-    cin>>source;
+    cin>>source>>destination;
 
-    cout<<"Enter destination city : ";
-    cin>>destination;
+    RouteResult result=
+        rf.getRoute(
+            source,
+            destination
+        );
 
-    int start=route.maps.Ids[source];
-    int end=route.maps.Ids[destination];
+    if(result.distance==INT_MAX){
 
-    vector<int> path=route.finder(start,end);
+        cout<<"No route found\n";
 
-    route.routeDisplay(path,route.distance);
+        return 0;
+    }
+
+    cout<<"Distance : "
+        <<result.distance
+        <<"\n";
+
+    for(auto city:result.path){
+
+        cout<<city<<" -> ";
+    }
+
+    cout<<"\n";
 
     return 0;
 }
