@@ -1,6 +1,6 @@
 # 🛣️ Path Optimizer Using Dijkstra's Algorithm (C++)
 
-A simple C++ project that finds the cheapest route between two cities using **Dijkstra's Shortest Path Algorithm**. The road network is loaded from a text file, and the program outputs the minimum-cost path along with its total travel cost.
+A C++ project that finds the cheapest route between two cities using **Dijkstra's Shortest Path Algorithm**. The road network is loaded from a text file, and the program outputs the minimum-cost path along with its total travel cost.
 
 ---
 
@@ -16,181 +16,96 @@ A simple C++ project that finds the cheapest route between two cities using **Di
 
 ---
 
+# 🛣️ Route Finder
+
+A C++ application that finds the shortest path between two cities using **Dijkstra's Algorithm**. The road network is loaded from a `roads.txt` file, and the project is deployed through a **Node.js** server for easy access.
+
+## 🚀 Features
+
+- Finds the minimum-cost route between two cities
+- Uses Dijkstra's Algorithm
+- Reads road data from `roads.txt`
+- Fast adjacency-list implementation
+- Node.js deployment support
+
 ## 📂 Project Structure
 
 ```
 .
-├── main.cpp        # Source code
-├── roads.txt       # Road network data
-└── README.md
+├── logic/
+│   ├── graph.cpp
+│   ├── graph.h
+│   ├── routeFinder.cpp
+│   ├── routeFinder.h
+│   ├── main2.cpp
+│   ├── roads.txt
+│   └── app.exe
+│
+├── web/
+│   ├── public/
+│   ├── node_modules/
+│   ├── server.js
+│   ├── package.json
+│   └── package-lock.json
+│
+└── raw code/
 ```
 
----
+## 📄 Input Format
 
-## 📖 Input File Format
-
-The road network should be stored in a file named **roads.txt**.
-
-Each line should contain:
+Each line in `roads.txt`:
 
 ```
 City1 City2 Distance
 ```
 
-### Example
+Example:
 
 ```
 Delhi Mumbai 1400
 Mumbai Pune 150
 Pune Bangalore 840
-Delhi Jaipur 280
-Jaipur Ahmedabad 670
-Ahmedabad Mumbai 530
 ```
 
-The graph is considered **undirected**, so every road can be travelled in both directions.
+## ▶️ Run Locally
 
----
-
-## ▶️ How to Run
-
-### Compile
+### C++ Version
 
 ```bash
-g++ main.cpp -o RouteFinder
-```
-
-### Run
-
-```bash
+g++ logic/main2.cpp logic/graph.cpp logic/routeFinder.cpp -o RouteFinder
 ./RouteFinder
 ```
 
-On Windows (MinGW)
+### Node.js Version
 
 ```bash
-g++ main.cpp -o RouteFinder.exe
-RouteFinder.exe
+cd web
+npm install
+npm start
 ```
 
----
+## ⚙️ Algorithm
 
-## 💻 Example
+- **Algorithm:** Dijkstra's Shortest Path
+- **Time Complexity:** `O((V + E) log V)`
+- **Space Complexity:** `O(V + E)`
 
-### roads.txt
+## 🛠️ Tech Stack
 
-```
-Delhi Mumbai 1400
-Mumbai Pune 150
-Pune Bangalore 840
-Delhi Jaipur 280
-Jaipur Ahmedabad 670
-Ahmedabad Mumbai 530
-```
+- C++
+- STL
+- Node.js
+- File Handling (`fstream`)
 
-### Input
+## 📌 Future Improvements
 
-```
-Enter the city from to
-
-Delhi Bangalore
-```
-
-### Output
-
-```
-Best route among all routes possible is:
-
-Delhi->Mumbai->Pune->Bangalore->
-
-Total Cost:2390
-```
-
----
-
-## ⚙️ Algorithm Used
-
-The project uses **Dijkstra's Shortest Path Algorithm**.
-
-### Time Complexity
-
-Using a priority queue:
-
-- **O((V + E) log V)**
-
-where
-
-- **V** = Number of cities
-- **E** = Number of roads
-
-### Space Complexity
-
-```
-O(V + E)
-```
-
----
-
-## 🏗️ Code Structure
-
-### `graph`
-
-Responsible for:
-
-- Reading `roads.txt`
-- Assigning IDs to cities
-- Building the adjacency list
-
-### `routeFinder`
-
-Responsible for:
-
-- Running Dijkstra's Algorithm
-- Finding the shortest path
-- Printing the final route
-
-### `input`
-
-Responsible for:
-
-- Taking source and destination cities from the user
-
----
-
-## 📚 Data Structures Used
-
-- `unordered_map`
-- `vector`
-- `priority_queue`
-- `pair`
-- `fstream`
-
----
-
-## 🚀 Future Improvements
-
-- Directed road support
-- Add/remove cities dynamically
-- Save updated graph back to file
-- Display multiple shortest paths
-- GUI using Qt or SFML
 - Interactive map visualization
-- Road distance and travel time support
-- A* Search Algorithm for faster routing
-- Case-insensitive city search
-- Better input validation
+- Dynamic road updates
+- Multiple shortest paths
+- Case-insensitive city names
 
 ---
 
-## 📝 Notes
-
-- City names should not contain spaces in the current implementation.
-- The file **roads.txt** must exist in the same directory as the executable.
-- If no path exists, the program displays an appropriate message.
-
----
-
-## 👨‍💻 Author
 
 **Dip Rajhans Jadhav**
 
