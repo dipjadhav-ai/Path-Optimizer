@@ -1,21 +1,3 @@
-# 🛣️ Path Optimizer Using Dijkstra's Algorithm (C++)
-
-A C++ project that finds the cheapest route between two cities using **Dijkstra's Shortest Path Algorithm**. The road network is loaded from a text file, and the program outputs the minimum-cost path along with its total travel cost.
-
----
-
-## 📌 Features
-
-- Reads road network from a file (`roads.txt`)
-- Represents the map using an adjacency list
-- Uses Dijkstra's Algorithm for shortest path
-- Displays:
-  - Best route
-  - Total travel cost
-- Supports adding new cities automatically while reading the file
-
----
-
 # 🛣️ Route Finder
 
 A C++ application that finds the shortest path between two cities using **Dijkstra's Algorithm**. The road network is loaded from a `roads.txt` file, and the project is deployed through a **Node.js** server for easy access.
