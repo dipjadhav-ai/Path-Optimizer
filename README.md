@@ -71,6 +71,8 @@ npm start
 - **Algorithm:** Dijkstra's Shortest Path
 - **Time Complexity:** `O((V + E) log V)`
 - **Space Complexity:** `O(V + E)`
+- **Algorithm:** A*Search Shortest Path:-
+- **Algorithm:** D*-Lite Shortest Path
 
 ## 🛠️ Tech Stack
 
